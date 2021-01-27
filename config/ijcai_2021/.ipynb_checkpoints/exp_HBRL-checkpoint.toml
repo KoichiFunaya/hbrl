@@ -1,0 +1,59 @@
+# Keys
+[Title]
+title            = "Experiment config file - Hierarchical Bayesian Rule List"
+
+[ExperimentID]
+Exp_ID           = '1'
+
+# Flags
+[default_flags]
+verbose          = true
+debug            = 200
+
+# Configuration for overall experiment
+[DataPath]
+# cross-validation data files
+module_name      = 'ijcai_2021'
+raw_file_name    = 'raw_data_N=1000_2021-01-07_23:32:00.pkl'
+LGBM_file_name   = 'LGBM_N=1000_E=10_L=30_2021-01-14_16:43:55.pkl'
+data_prefix      = 'data_N=1000'
+data_file_name   = 'data_N=1000_K=196_2021-01-12_21:00:22.pkl'
+
+# Hypter parameters
+[HyperParameters]
+
+# hyper parameters for filtering
+min_capture      = 1
+K_target         = 7
+scheme           = "select_by_labels"
+
+# parameters for MCMC sampling
+nSamples         = 150
+nTune            = 200
+nCores           = 8
+random_seed      = 74
+
+# hyper parameters for Layer-0 configuration
+max_rules        = 5            # maximum number of L1 rules; stop adding L1 rules if n_rules>=max_rules. Ignore if max_rules=-1
+min_rules        = 0            # minimum rules from which to find L1 rules; stop adding L1 rules if K<=min_rules
+min_samples      = 10           # minimum number of samples for which to find L1 rules; stop adding L1 rules if N<=min_samples
+alternate_eta    = false        # if true, then keep alternating the prior observation distribution parameters
+
+# hyper parameters for L1 Prior distribution
+_lambda_         = 10           # expected number of layer-0 rules; if alternate_eta==false, then 2 x max_rules (? leave half the data for label=0)
+L0_pos           = 0            # pervious number of layer-0 rules 
+                                # we expect (_lamda_ - L0_pos + 1) rules in the Layer-0 rule list
+s_prev_          = "None"       # No s_prev as L0_pos=0  
+_zeta_           = 3            # poisson parameter for rule count probability
+_mu_             = 0.023        # we have to manually adjust the scale factor
+_gamma_          = 1
+_tau_            = 2.0
+_xi_             = 0.5
+_kappa_          = 1.0
+_nu_             = 1.0
+
+# hyper parameters for L1 Likelihood distribution
+_eta_            = [10.0,1.0]   # hyperparameter to capture positives
+_eta_2_          = [1.0,10.0]   # alternate hyperparameter to capture negatives
+_rho_            = 22.0
+

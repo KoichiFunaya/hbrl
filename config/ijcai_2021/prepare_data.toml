@@ -1,0 +1,29 @@
+# Keys
+title="Experiment config file"
+
+# Flags
+[default_flags]
+verbose                      = 5
+
+[DataPath]
+# cross-validation data files
+data_dir         = "/media/data/ijcai_2021/"
+file_name        = "raw_data_N=1000_2021-01-07_23:32:00.pkl"
+
+[EMBER_LGBM]
+ember_datadir                = "/media/data/ember/ember_2018/"      # Directory with raw features
+featureversion               = 2                        # EMBER feature version
+force_create_vec             = false                    # if True, then force creating vectorized features
+optimize                     = false                    # gridsearch to find best parameter
+modelpath                    = "model.txt"
+evals_result                 = "None"
+boosting                     = "gbdt"
+objective                    = "binary"
+learning_rate                = 0.05
+num_threads                  = 0
+seed                         = "None"
+num_leaves                   = 30                        # defaul = 30
+max_depth                    = -1                       # default = -1 (no limit)
+n_estimators                 = 10                       # default = 100
+min_data_in_leaf             = 20
+feature_fraction             = 0.5
